@@ -6,6 +6,10 @@ This package is inspired by [FaridSafi/react-native-gifted-form](https://github.
 
 The reason for creating a new package is that I want the form components to be presentational only, and not to store state at all. This way we can easily integrate with [Redux Form](erikras.github.io/redux-form/), any other form management tool, or even implement our own form management.
 
+## Installation
+
+```npm install react-native-stateless-form --save```
+
 ## StatelessForm
 
 A wrapper that will manage auto-focusing and auto-scrolling for its children widgets
@@ -56,3 +60,18 @@ If you want your widget to receive focus when previous widget finished editing, 
 - Your widget must have a component created with ES6 `class` statement.
 - Your widget should implement the `focus()` method.
 - You must pass the component's class name to your form's `focusableTypes` prop.
+
+### Scrollable input widgets
+
+If you want your widget to receive scroll when showing keyboard, you must implement the following pattern:
+
+- Your widget should implement keyboard show management and call `this.props.onKeyboardShow({ height, y, keyboardHeight })` method on keyboard show. `height` must be your widget's height, `y` must be your widget y position and `keyboardHeight` must be the currently open keyboard height.
+- Check [InlineTextInput](https://github.com/danielweinmann/react-native-stateless-form/blob/master/widgets/InlineTextInput.js) for references on how to implement it.
+
+## Contributing
+
+Please create issues and send pull requests!
+
+## License
+
+[MIT](LICENSE)
