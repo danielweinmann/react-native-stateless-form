@@ -42,6 +42,11 @@ export default class InlineTextInput extends Component {
     this.refs.input.focus()
   }
 
+  shouldDisplayMessage() {
+    const { value, valid, message } = this.props
+    return (value && value.length > 0 && !valid && message)
+  }
+
   handleSubmitEditing() {
     const { nextInput, onNextInputFocus } = this.props
     onNextInputFocus && onNextInputFocus(nextInput)
@@ -68,6 +73,22 @@ export default class InlineTextInput extends Component {
     )
   }
 
+  renderMessage() {
+    const { value, valid, message, messageStyle } = this.props
+    if (this.shouldDisplayMessage()) {
+      return(
+        <Text style={[{
+          color: 'red',
+          marginLeft: 10,
+          marginBottom: 6,
+          fontSize: 10,
+        }, messageStyle]}>
+          { message }
+        </Text>
+      )
+    }
+  }
+
   render() {
     const { title, value, valid, message, style, titleStyle, inputStyle, messageStyle, nextInput } = this.props
     return (
@@ -84,7 +105,7 @@ export default class InlineTextInput extends Component {
           flexDirection: 'row',
           alignItems: 'center',
           paddingTop: 6,
-          paddingBottom: ((!valid && message) ? 0 : 6)
+          paddingBottom: (this.shouldDisplayMessage() ? 0 : 6)
         }}>
           { this.renderIcon() }
           <Text
@@ -111,15 +132,7 @@ export default class InlineTextInput extends Component {
             }, inputStyle]}
           />
         </View>
-        { !valid && message && <Text style={[{
-            color: 'red',
-            marginLeft: 10,
-            marginBottom: 6,
-            fontSize: 10,
-          }, messageStyle]}>
-            { message }
-          </Text>
-        }
+        { this.renderMessage() }
       </View>
     )
   }
