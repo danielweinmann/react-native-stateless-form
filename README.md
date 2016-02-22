@@ -21,6 +21,7 @@ It implements the most common pattern of mobile form user interaction by convens
 
 - It does not implement form validation. We recommend using [validator.js](https://github.com/chriso/validator.js) form that. But you can use anything you want.
 - It does not implement form state management. We recommend using [Redux Form](erikras.github.io/redux-form/) for that. But you can use anything you want.
+- It does not implement a submit button and enabled/disabled/loading behaviour for you. We recommend using [apsl-react-native-button](https://github.com/APSL/react-native-button) for that. But you can use anything you want.
 
 ## Support
 
