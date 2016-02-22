@@ -111,7 +111,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 
 ## Widgets
 
-### TextInput
+#### TextInput
 
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
@@ -134,7 +134,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 
 \+ Any other [TextInput](https://facebook.github.io/react-native/docs/textinput.html#content) prop you wish to pass.
 
-### Other widgets
+#### Other widgets
 
 My intention is to implement most of [FaridSafi/react-native-gifted-form](https://github.com/FaridSafi/react-native-gifted-form)'s widgets. But I'll do each one only when I need it in a real project, so it might take some time.
 
@@ -144,7 +144,7 @@ PR's are very much welcome!
 
 Any react component can be rendered inside Stateless Form as a widget. But there is a special case below:
 
-### Focusable input widgets
+#### Focusable input widgets
 
 If you want your widget to receive focus when previous widget finished editing, you must implement the following pattern:
 
@@ -152,7 +152,7 @@ If you want your widget to receive focus when previous widget finished editing, 
 - Your widget should implement the `focus()` method.
 - You must pass the component's class name to your form's `focusableTypes` prop.
 
-### Scrollable input widgets
+#### Scrollable input widgets
 
 If you want your widget to receive scroll when showing keyboard, you must implement the following pattern:
 
