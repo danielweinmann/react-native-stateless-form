@@ -39,14 +39,16 @@ The reason for creating a new package is that I want the form components to be p
 
 ```npm install react-native-stateless-form --save```
 
-## Example
+## Examples
+
+#### The dirtiest example
 
 ```js
 import React, { Component } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
 
-export default class Form extends Component {
+class Form extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -126,6 +128,99 @@ export default class Form extends Component {
 import { AppRegistry } from 'react-native'
 AppRegistry.registerComponent('Form', () => Form)
 ```
+
+#### Create your own widget to keep it DRY
+
+```js
+import React, { Component } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
+
+class FormInput extends Component {
+  // You MUST implement focus method for your widget to work
+  focus() {
+    this.refs.input.focus()
+  }
+
+  render() {
+    const { iconName } = this.props
+    return (
+      <InlineTextInput
+        ref='input' // This is necessary for focus() implementation to work
+        style={{ borderColor: 'gray' }}
+        titleStyle={{ color: 'dimgray' }}
+        inputStyle={{ color: 'slategray' }}
+        messageStyle={{ color: 'red' }}
+        icon={ <Icon name={iconName} size={18} color={'steelblue'} /> }
+        validIcon={ <Icon name='check' size={18} color='green' /> }
+        invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+        { ...this.props }
+      />
+    )
+  }
+}
+
+class Form extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      name: null,
+      email: null,
+      password: null,
+    }
+  }
+
+  render() {
+    const { name, email, password } = this.state
+    const nameValid = (name && name.length > 0 ? true : false)
+    const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+    const passwordValid = (password && password.length >= 8 ? true : false)
+    return (
+      <StatelessForm
+        focusableTypes={['InlineTextInput', 'FormInput']} // You MUST add this prop for your widget to be considered an input and therefore manage focusing correctly
+        style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}
+      >
+        <FormInput
+          title='Name'
+          placeholder='Tell us your name'
+          iconName='account-circle'
+          value={name}
+          valid={nameValid}
+          message={name && !nameValid ? 'Please fill your name' : null}
+          onChangeText={(text) => { this.setState({name: text}) }}
+        />
+        <FormInput
+          title='Email'
+          placeholder='type@your.email'
+          autoCorrect={false}
+          autoCapitalize='none'
+          keyboardType='email-address'
+          iconName='mail-outline'
+          value={email}
+          valid={emailValid}
+          message={email && !emailValid ? 'Please enter a valid email address' : null}
+          onChangeText={(text) => { this.setState({email: text}) }}
+        />
+        <FormInput
+          title='Password'
+          placeholder='Create a password'
+          autoCorrect={false}
+          autoCapitalize='none'
+          secureTextEntry={true}
+          iconName='vpn-key'
+          value={password}
+          valid={passwordValid}
+          message={password && !passwordValid ? 'Password too short' : null}
+          onChangeText={(text) => { this.setState({password: text}) }}
+        />
+      </StatelessForm>
+    )
+  }
+}
+
+import { AppRegistry } from 'react-native'
+AppRegistry.registerComponent('Form', () => Form)
+``
 
 ## StatelessForm
 
