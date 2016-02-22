@@ -80,7 +80,7 @@ export default class InlineTextInput extends Component {
         <Text style={[{
           color: 'red',
           marginLeft: 10,
-          marginBottom: 6,
+          marginBottom: 10,
           fontSize: 10,
         }, messageStyle]}>
           { message }
@@ -127,8 +127,9 @@ export default class InlineTextInput extends Component {
             value={value}
             style={[{
               flex: 1,
-              height: 24,
+              height: 36,
               fontSize: 14,
+              backgroundColor: 'white',
             }, inputStyle]}
           />
         </View>
