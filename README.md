@@ -1,5 +1,32 @@
 # react-native-stateless-form
 
+## What it does
+
+It implements the most common pattern of mobile form user interaction by convension over configuration. You'll never have to worry again about positioning and focusing form fields.
+
+- It uses inline form fields with icons and titles
+- It displays different icons for valid and invalid field values
+- It displays validation message inside the field
+- When a field receives focus, it displays a keyboard (*)
+- If it is not the last field in the form, the keyboard return key is set to `Next`
+- If it is the last field in the form, the keyboard return key is set to `Done` and hides keaboard on return (**)
+- When a field receives focus, the form scrolls to the top of the field to avoid it being hidden behind the keyboard
+- When all fields lose focus, the form scrolls back to the top of the form
+
+ (*) Unless an external keyboard is connected to the device
+ (**) In the future it might be set to `Go` and automatically submit the form on return
+
+## What it does NOT
+
+- It does not implement form validation. We recommend using [validator.js](https://github.com/chriso/validator.js) form that. But you can use anything you want.
+- It does not implement form state management. We recommend using [Redux Form](erikras.github.io/redux-form/) for that. But you can use anything you want.
+
+## Support
+
+- React Native 0.20+
+- iOS
+- Android (coming soon)
+
 ## Inspiration
 
 This package is inspired by [FaridSafi/react-native-gifted-form](https://github.com/FaridSafi/react-native-gifted-form), and my intention is to merge with it in the future.
