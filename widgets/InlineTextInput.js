@@ -158,7 +158,7 @@ InlineTextInput.propTypes = {
 
 InlineTextInput.defaultProps = {
   title: 'Use title prop',
-  value: 'Use value prop',
+  value: null,
   valid: false,
   message: null,
   style: {},

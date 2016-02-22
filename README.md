@@ -33,7 +33,7 @@ It implements the most common pattern of mobile form user interaction by convens
 
 This package is inspired by [FaridSafi/react-native-gifted-form](https://github.com/FaridSafi/react-native-gifted-form), and my intention is to merge with it in the future.
 
-The reason for creating a new package is that I want the form components to be presentational only, and not to store state at all. This way we can easily integrate with [Redux Form](erikras.github.io/redux-form/), any other form management tool, or even implement our own form management.
+The reason for creating a new package is that I want the form components to be presentational only, and not to store state at all. This way we can easily integrate with Redux Form, any other form management tool, or even implement our own form management.
 
 ## Installation
 
@@ -362,7 +362,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
 | title | string | 'Use title prop' | Title for the text input |
-| value | string | 'Use value prop' | Value for the text input |
+| value | string | null | Value for the text input |
 | valid | boolean | false | Whether the value is valid or not |
 | message | string | null | Validation message to be shown |
 | style | object | {} | Style changes to the main ScrollView |
