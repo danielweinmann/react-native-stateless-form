@@ -1,13 +1,39 @@
-import React, { Component, PropTypes, View, Text, TextInput } from 'react-native'
+import React, { Component, PropTypes, DeviceEventEmitter, View, Text, TextInput } from 'react-native'
 
 export default class InlineTextInput extends Component {
+  componentDidMount() {
+    this.layout = { x: 0, y: 0, width: 0, height: 0 }
+    this.willShowKeyboard = false
+    DeviceEventEmitter.addListener('keyboardWillShow', this.handleKeyboardShow.bind(this))
+  }
+
+  handleLayout(event) {
+    this.layout = event.nativeEvent.layout
+  }
+
+  handleFocus(event) {
+    const { onFocus } = this.props
+    this.willShowKeyboard = true
+    onFocus && onFocus()
+  }
+
+  handleKeyboardShow(frames) {
+    const keyboardHeight = frames.endCoordinates.height
+    const { height, y } = this.layout
+    if (this.willShowKeyboard) {
+      const { onKeyboardShow } = this.props
+      onKeyboardShow && onKeyboardShow({ height, y, keyboardHeight })
+      this.willShowKeyboard = false
+    }
+  }
+
   focus() {
     this.refs.input.focus()
   }
 
   handleSubmitEditing() {
-    const { nextInput } = this.props
-    this.props.onNextInputFocus && this.props.onNextInputFocus(nextInput)
+    const { nextInput, onNextInputFocus } = this.props
+    onNextInputFocus && onNextInputFocus(nextInput)
   }
 
   renderIcon() {
@@ -23,7 +49,7 @@ export default class InlineTextInput extends Component {
     return (
       <View
         style={[{
-          marginHorizontal: 4,
+          marginHorizontal: 6,
         }, iconStyle]}
       >
         {renderedIcon}
@@ -34,12 +60,15 @@ export default class InlineTextInput extends Component {
   render() {
     const { title, value, valid, message, style, titleStyle, inputStyle, messageStyle, nextInput } = this.props
     return (
-      <View style={[{
-        backgroundColor: 'white',
-        borderTopWidth: 0.5,
-        borderBottomWidth: (nextInput ? 0 : 0.5),
-        borderColor: 'lightgray',
-      }, style]}>
+      <View
+        onLayout={this.handleLayout.bind(this)}
+        style={[{
+          backgroundColor: 'white',
+          borderTopWidth: 0.5,
+          borderBottomWidth: (nextInput ? 0 : 0.5),
+          borderColor: 'lightgray',
+        }, style]}
+      >
         <View style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -49,8 +78,9 @@ export default class InlineTextInput extends Component {
           { this.renderIcon() }
           <Text
             style={[{
+              flex: 0.5,
+              fontSize: 14,
               fontWeight: 'bold',
-              width: 98,
             }, titleStyle]}
           >
             {title}
@@ -60,6 +90,7 @@ export default class InlineTextInput extends Component {
             returnKeyType={ nextInput ? 'next' : 'done' }
             onSubmitEditing={this.handleSubmitEditing.bind(this)}
             { ...this.props }
+            onFocus={this.handleFocus.bind(this)}
             ref='input'
             value={value}
             style={[{
@@ -71,7 +102,7 @@ export default class InlineTextInput extends Component {
         </View>
         { !valid && message && <Text style={[{
             color: 'red',
-            marginLeft: 8,
+            marginLeft: 10,
             marginBottom: 6,
             fontSize: 10,
           }, messageStyle]}>
@@ -98,6 +129,7 @@ InlineTextInput.propTypes = {
   invalidIcon: PropTypes.element,
   nextInput: PropTypes.element,
   onNextInputFocus: PropTypes.func,
+  onKeyboardShow: PropTypes.func,
 }
 
 InlineTextInput.defaultProps = {
@@ -115,4 +147,5 @@ InlineTextInput.defaultProps = {
   invalidIcon: null,
   nextInput: null,
   onNextInputFocus: null,      
+  onKeyboardShow: null,      
 }

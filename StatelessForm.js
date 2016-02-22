@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, View } from 'react-native'
+import React, { Component, PropTypes, ScrollView } from 'react-native'
 
 export default class StatelessForm extends Component {
   childrenWithProps() {
@@ -6,14 +6,13 @@ export default class StatelessForm extends Component {
     let nextInput = null
     let inputCount = 0
     return React.Children.map(this.props.children, (child) => child).reverse().map((child) => {
-      // Checks for input ref to know it's an input widget
       if (focusableTypes.indexOf(child.type.name) > -1) {
-        console.log('childrenWithProps', child)
         inputCount++
         const input = React.cloneElement(child, {
           ref: `input${inputCount}`,
           nextInput: nextInput,
           onNextInputFocus: this.handleNextInputFocus.bind(this),
+          onKeyboardShow: this.handleKeyboardShow.bind(this),
         })
         nextInput = input
         return input
@@ -27,17 +26,26 @@ export default class StatelessForm extends Component {
     if (nextInput) {
       const input = this.refs[nextInput.ref]
       input.focus()
+    } else {
+      this.refs.scrollView.scrollTo({y: 0})
     }
+  }
+
+  handleKeyboardShow({ height, y, keyboardHeight }) {
+    this.refs.scrollView.scrollTo({y: y})
   }
 
   render() {
     return (
-      <View style={[{
-        flex: 1,
-        alignSelf: 'stretch',
-      }, this.props.style]}>
+      <ScrollView
+        ref='scrollView'
+        style={[{
+          flex: 1,
+          alignSelf: 'stretch',
+        }, this.props.style]}
+      >
         {this.childrenWithProps()}
-      </View>
+      </ScrollView>
     )
   }  
 }

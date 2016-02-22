@@ -34,7 +34,8 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 | validIcon | element | null | Any react component to be used as icon when valid. Requires `icon` prop |
 | invalidIcon | element | null | Any react component to be used as icon when invalid. Requires `icon` prop |
 | nextInput | element | null | Any react component that responds to focus() to be focused when finished editing |
-| onNextInputFocus | function | automatic | Function to focus on nextInput. Automatically passed by StatelessForm. Feel free to override. |
+| onNextInputFocus | function | automatic | Function to focus on nextInput. Automatically passed by StatelessForm. But feel free to override. |
+| onKeyboardShow | function | automatic | Function to scroll to top of input on keyboard show. Automatically passed by StatelessForm. But feel free to override. |
 
 \+ Any other [TextInput](https://facebook.github.io/react-native/docs/textinput.html#content) prop you wish to pass.
 
