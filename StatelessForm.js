@@ -13,6 +13,7 @@ export default class StatelessForm extends Component {
           nextInput: nextInput,
           onNextInputFocus: this.handleNextInputFocus.bind(this),
           onKeyboardShow: this.handleKeyboardShow.bind(this),
+          onKeyboardHide: this.handleKeyboardHide.bind(this),
         })
         nextInput = input
         return input
@@ -27,8 +28,12 @@ export default class StatelessForm extends Component {
       const input = this.refs[nextInput.ref]
       input.focus()
     } else {
-      this.refs.scrollView.scrollTo({y: 0})
+      this.handleKeyboardHide()
     }
+  }
+
+  handleKeyboardHide() {
+    this.refs.scrollView.scrollTo({y: 0})
   }
 
   handleKeyboardShow({ height, y, keyboardHeight }) {

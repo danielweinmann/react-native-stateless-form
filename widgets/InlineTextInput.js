@@ -4,7 +4,9 @@ export default class InlineTextInput extends Component {
   componentDidMount() {
     this.layout = { x: 0, y: 0, width: 0, height: 0 }
     this.willShowKeyboard = false
+    this.isShowingKeyboard = false
     DeviceEventEmitter.addListener('keyboardWillShow', this.handleKeyboardShow.bind(this))
+    DeviceEventEmitter.addListener('keyboardWillHide', this.handleKeyboardHide.bind(this))
   }
 
   handleLayout(event) {
@@ -23,7 +25,16 @@ export default class InlineTextInput extends Component {
     if (this.willShowKeyboard) {
       const { onKeyboardShow } = this.props
       onKeyboardShow && onKeyboardShow({ height, y, keyboardHeight })
+      this.isShowingKeyboard = true
       this.willShowKeyboard = false
+    }
+  }
+
+  handleKeyboardHide() {
+    if (this.isShowingKeyboard) {
+      const { onKeyboardHide } = this.props
+      onKeyboardHide && onKeyboardHide()
+      this.isShowingKeyboard = false
     }
   }
 

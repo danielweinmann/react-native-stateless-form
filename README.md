@@ -130,6 +130,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 | nextInput | element | automatic | Any react component that responds to focus() to be focused when finished editing. Automatically passed by StatelessForm. |
 | onNextInputFocus | function | automatic | Function to focus on nextInput. Automatically passed by StatelessForm. |
 | onKeyboardShow | function | automatic | Function to scroll to top of input on keyboard show. Automatically passed by StatelessForm. |
+| onKeyboardHide | function | automatic | Function to scroll to top of form on keyboard hide. Automatically passed by StatelessForm. |
 
 \+ Any other [TextInput](https://facebook.github.io/react-native/docs/textinput.html#content) prop you wish to pass.
 
@@ -155,7 +156,8 @@ If you want your widget to receive focus when previous widget finished editing, 
 
 If you want your widget to receive scroll when showing keyboard, you must implement the following pattern:
 
-- Your widget should implement keyboard show management and call `this.props.onKeyboardShow({ height, y, keyboardHeight })` method on keyboard show. `height` must be your widget's height, `y` must be your widget y position and `keyboardHeight` must be the currently open keyboard height.
+- Your widget should implement keyboard show management and call `this.props.onKeyboardShow({ height, y, keyboardHeight })` on keyboard show. `height` must be your widget's height, `y` must be your widget y position and `keyboardHeight` must be the currently open keyboard height.
+- Your widget should implement keyboard hide management and call `this.props.onKeyboardHide()` on keyboard hide.
 - Check [InlineTextInput](https://github.com/danielweinmann/react-native-stateless-form/blob/master/widgets/InlineTextInput.js) for references on how to implement it.
 
 ## Contributing
