@@ -14,7 +14,6 @@ It implements the most common pattern of mobile form user interaction by convens
 - When all fields lose focus, the form scrolls back to the top of the form
 
 (\*) Unless an external keyboard is connected to the device
-
 (\*\*) In the future it might be set to `Go` and automatically submit the form on return
 
 ## What it does NOT
