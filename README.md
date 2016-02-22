@@ -177,7 +177,9 @@ class Form extends Component {
     const passwordValid = (password && password.length >= 8 ? true : false)
     return (
       <StatelessForm
-        focusableTypes={['InlineTextInput', 'FormInput']} // You MUST add this prop for your widget to be considered an input and therefore manage focusing correctly
+        // You MUST add this prop for your widget to be considered
+        // an input and therefore manage focusing correctly
+        focusableTypes={['InlineTextInput', 'FormInput']}
         style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}
       >
         <FormInput
@@ -220,7 +222,7 @@ class Form extends Component {
 
 import { AppRegistry } from 'react-native'
 AppRegistry.registerComponent('Form', () => Form)
-```
+``
 
 ## StatelessForm
 
