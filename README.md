@@ -220,7 +220,7 @@ class Form extends Component {
 
 import { AppRegistry } from 'react-native'
 AppRegistry.registerComponent('Form', () => Form)
-``
+```
 
 ## StatelessForm
 
