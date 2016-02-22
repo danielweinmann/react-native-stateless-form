@@ -38,6 +38,7 @@ export default class StatelessForm extends Component {
   render() {
     return (
       <ScrollView
+        { ...this.props }
         ref='scrollView'
         style={[{
           flex: 1,

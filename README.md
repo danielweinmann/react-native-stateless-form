@@ -10,6 +10,94 @@ The reason for creating a new package is that I want the form components to be p
 
 ```npm install react-native-stateless-form --save```
 
+## Example
+
+```js
+import React, { Component } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
+
+export default class Form extends Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      name: null,
+      email: null,
+      password: null,
+    }
+  }
+
+  render() {
+    const { name, email, password } = this.state
+    const nameValid = (name && name.length > 0 ? true : false)
+    const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+    const passwordValid = (password && password.length >= 8 ? true : false)
+    return (
+      <StatelessForm style={{
+        flex: 1,
+        marginTop: 20,
+        backgroundColor: 'lightgray',
+      }}>
+        <InlineTextInput
+          title='Name'
+          placeholder='Tell us your name'
+          style={{ borderColor: 'gray' }}
+          titleStyle={{ color: 'dimgray' }}
+          inputStyle={{ color: 'slategray' }}
+          messageStyle={{ color: 'red' }}
+          icon={ <Icon name={'account-circle'} size={18} color={'steelblue'} /> }
+          validIcon={ <Icon name='check' size={18} color='green' /> }
+          invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+          value={name}
+          valid={nameValid}
+          message={name && !nameValid ? 'Please fill your name' : null}
+          onChangeText={(text) => { this.setState({name: text}) }}
+        />
+        <InlineTextInput
+          title='Email'
+          placeholder='type@your.email'
+          autoCorrect={false}
+          autoCapitalize='none'
+          keyboardType='email-address'
+          style={{ borderColor: 'gray' }}
+          titleStyle={{ color: 'dimgray' }}
+          inputStyle={{ color: 'slategray' }}
+          messageStyle={{ color: 'red' }}
+          icon={ <Icon name={'mail-outline'} size={18} color={'steelblue'} /> }
+          validIcon={ <Icon name='check' size={18} color='green' /> }
+          invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+          value={email}
+          valid={emailValid}
+          message={email && !emailValid ? 'Please enter a valid email address' : null}
+          onChangeText={(text) => { this.setState({email: text}) }}
+        />
+        <InlineTextInput
+          title='Password'
+          placeholder='Create a password'
+          autoCorrect={false}
+          autoCapitalize='none'
+          secureTextEntry={true}
+          style={{ borderColor: 'gray' }}
+          titleStyle={{ color: 'dimgray' }}
+          inputStyle={{ color: 'slategray' }}
+          messageStyle={{ color: 'red' }}
+          icon={ <Icon name={'vpn-key'} size={18} color={'steelblue'} /> }
+          validIcon={ <Icon name='check' size={18} color='green' /> }
+          invalidIcon={ <Icon name='clear' size={18} color='red' /> }
+          value={password}
+          valid={passwordValid}
+          message={password && !passwordValid ? 'Password too short' : null}
+          onChangeText={(text) => { this.setState({password: text}) }}
+        />
+      </StatelessForm>
+    )
+  }
+}
+
+import { AppRegistry } from 'react-native'
+AppRegistry.registerComponent('Form', () => Form)
+```
+
 ## StatelessForm
 
 A wrapper that will manage auto-focusing and auto-scrolling for its children widgets
@@ -18,6 +106,8 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 |---------------|----------|--------------|----------------------------------------------------------------|
 | focusableTypes | Array of string | ['InlineTextInput'] | A list of focusable widget types |
 | style | object | {} | Style for the form wrapper |
+
+\+ Any other [ScrollView](https://facebook.github.io/react-native/docs/scrollview.html#content) prop you wish to pass.
 
 ## Widgets
 
@@ -29,7 +119,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 | value | string | 'Use value prop' | Value for the text input |
 | valid | boolean | false | Whether the value is valid or not |
 | message | string | null | Validation message to be shown |
-| style | object | {} | Style changes to the main View |
+| style | object | {} | Style changes to the main ScrollView |
 | iconStyle | object | {} | Style changes to the icon View |
 | titleStyle | object | {} | Style changes to the title Text |
 | inputStyle | object | {} | Style changes to the TextInput |
@@ -37,9 +127,9 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 | icon | element | null | Any react component to be used as icon |
 | validIcon | element | null | Any react component to be used as icon when valid. Requires `icon` prop |
 | invalidIcon | element | null | Any react component to be used as icon when invalid. Requires `icon` prop |
-| nextInput | element | null | Any react component that responds to focus() to be focused when finished editing |
-| onNextInputFocus | function | automatic | Function to focus on nextInput. Automatically passed by StatelessForm. But feel free to override. |
-| onKeyboardShow | function | automatic | Function to scroll to top of input on keyboard show. Automatically passed by StatelessForm. But feel free to override. |
+| nextInput | element | automatic | Any react component that responds to focus() to be focused when finished editing. Automatically passed by StatelessForm. |
+| onNextInputFocus | function | automatic | Function to focus on nextInput. Automatically passed by StatelessForm. |
+| onKeyboardShow | function | automatic | Function to scroll to top of input on keyboard show. Automatically passed by StatelessForm. |
 
 \+ Any other [TextInput](https://facebook.github.io/react-native/docs/textinput.html#content) prop you wish to pass.
 
