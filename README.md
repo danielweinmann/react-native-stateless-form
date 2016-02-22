@@ -17,7 +17,7 @@ It implements the most common pattern of mobile form user interaction by convens
 
 (\*\*) In the future it might be set to `Go` and automatically submit the form on return
 
-## What it does NOT
+## What it does NOT do
 
 - It does not implement form validation. We recommend using [validate-model](https://github.com/danielweinmann/validate-model) for that. But you can use anything you want.
 - It does not implement form state management. We recommend using [Redux Form](http://erikras.github.io/redux-form/) for that. But you can use anything you want.
