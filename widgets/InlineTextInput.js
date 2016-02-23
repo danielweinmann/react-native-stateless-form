@@ -65,7 +65,7 @@ export default class InlineTextInput extends Component {
     return (
       <View
         style={[{
-          marginHorizontal: 6,
+          marginLeft: 6,
         }, iconStyle]}
       >
         {renderedIcon}
@@ -113,6 +113,7 @@ export default class InlineTextInput extends Component {
               flex: 0.5,
               fontSize: 14,
               fontWeight: 'bold',
+              marginLeft: 6,
             }, titleStyle]}
           >
             {title}
