@@ -27,7 +27,7 @@ It implements the most common pattern of mobile form user interaction by convens
 
 - React Native 0.20+
 - iOS
-- Android (coming soon)
+- Android
 
 ## Inspiration
 
