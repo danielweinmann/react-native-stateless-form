@@ -43,6 +43,7 @@ export default class StatelessForm extends Component {
   render() {
     return (
       <ScrollView
+        keyboardShouldPersistTaps={true}
         { ...this.props }
         ref='scrollView'
         style={[{

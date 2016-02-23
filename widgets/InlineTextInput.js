@@ -81,7 +81,7 @@ export default class InlineTextInput extends Component {
           color: 'red',
           marginLeft: 10,
           marginBottom: 10,
-          fontSize: 10,
+          fontSize: 12,
         }, messageStyle]}>
           { message }
         </Text>
