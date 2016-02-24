@@ -1,6 +1,6 @@
 {
   "name": "react-native-stateless-form",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Stateless presentational form components for React Native",
   "main": "index.js",
   "scripts": {
