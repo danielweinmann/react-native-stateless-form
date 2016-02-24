@@ -5,8 +5,8 @@ export default class InlineTextInput extends Component {
     this.layout = { x: 0, y: 0, width: 0, height: 0 }
     this.willShowKeyboard = false
     this.isShowingKeyboard = false
-    DeviceEventEmitter.addListener('keyboardWillShow', this.handleKeyboardShow.bind(this))
-    DeviceEventEmitter.addListener('keyboardWillHide', this.handleKeyboardHide.bind(this))
+    DeviceEventEmitter.addListener('keyboardDidShow', this.handleKeyboardShow.bind(this))
+    DeviceEventEmitter.addListener('keyboardDidHide', this.handleKeyboardHide.bind(this))
   }
 
   handleLayout(event) {
