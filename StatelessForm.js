@@ -1,6 +1,10 @@
-import React, { Component, PropTypes, ScrollView } from 'react-native'
+import React, { Platform, Component, PropTypes, ScrollView, View } from 'react-native'
 
 export default class StatelessForm extends Component {
+  componentDidMount() {
+    this.willFocusInput = false
+  }
+
   childrenWithProps() {
     const { focusableTypes } = this.props
     let nextInput = null
@@ -12,8 +16,8 @@ export default class StatelessForm extends Component {
           ref: `input${inputCount}`,
           nextInput: nextInput,
           onNextInputFocus: this.handleNextInputFocus.bind(this),
-          onKeyboardShow: this.handleKeyboardShow.bind(this),
-          onKeyboardHide: this.handleKeyboardHide.bind(this),
+          onFocus: this.handleFocus.bind(this),
+          onBlur: this.handleBlur.bind(this),
         })
         nextInput = input
         return input
@@ -23,21 +27,26 @@ export default class StatelessForm extends Component {
     }).reverse()
   }
 
-  handleNextInputFocus(nextInput) {
+  handleNextInputFocus(nextInput, currentInput) {
     if (nextInput) {
       const input = this.refs[nextInput.ref]
+      this.willFocusInput = true
       input.focus()
     } else {
-      this.handleKeyboardHide()
+      currentInput.blur()
     }
   }
 
-  handleKeyboardHide() {
-    this.refs.scrollView.scrollTo({y: 0})
+  handleBlur() {
+    if (!this.willFocusInput) {
+      this.refs.scrollView.scrollTo({y: 0})
+    }
+    this.willFocusInput = false
   }
 
-  handleKeyboardShow({ height, y, keyboardHeight }) {
-    this.refs.scrollView.scrollTo({y: y})
+  handleFocus(scrollTo) {
+    this.willFocusInput = false
+    this.refs.scrollView.scrollTo({y: scrollTo})
   }
 
   render() {
@@ -52,6 +61,7 @@ export default class StatelessForm extends Component {
         }, this.props.style]}
       >
         {this.childrenWithProps()}
+        { Platform.OS == 'android' && <View style={{ height: 500 }}/> }
       </ScrollView>
     )
   }  

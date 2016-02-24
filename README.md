@@ -27,7 +27,7 @@ It implements the most common pattern of mobile form user interaction by convens
 
 - React Native 0.20+
 - iOS
-- Android
+- Android (see installation below)
 
 ## Inspiration
 
@@ -38,6 +38,10 @@ The reason for creating a new package is that I want the form components to be p
 ## Installation
 
 ```npm install react-native-stateless-form --save```
+
+#### Android
+
+You should add `android:windowSoftInputMode="adjustNothing"` attribute to the `<activity>` tag with `android:name=".MainActivity"` in your `AndroidManifest.xml`. Otherwise, it will have duplicate scroll behaviour.
 
 ## Examples
 
@@ -137,9 +141,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
 
 class FormInput extends Component {
-  // You MUST implement focus method for your widget to work
+  // You MUST implement focus and blur methods for your widget to work
   focus() {
     this.refs.input.focus()
+  }
+
+  blur() {
+    this.refs.input.blur()
   }
 
   render() {
@@ -263,6 +271,10 @@ const UserValidators = {
 class FormInput extends Component {
   focus() {
     this.refs.input.focus()
+  }
+
+  blur() {
+    this.refs.input.blur()
   }
 
   render() {
@@ -392,6 +404,10 @@ const validate = values => {
 class FormInput extends Component {
   focus() {
     this.refs.input.focus()
+  }
+
+  blur() {
+    this.refs.input.blur()
   }
 
   render() {
@@ -532,15 +548,16 @@ If you want your widget to receive focus when previous widget finished editing, 
 
 - Your widget must have a component created with ES6 `class` statement.
 - Your widget should implement the `focus()` method.
+- Your widget should implement the `blur()` method.
+- Your widget should implement `onSubmitEditing` or equivalent and call `this.props.onNextInputFocus(this.props.nextInput, this)` so StatelessForm can focus the next input or blur the current input.
 - You must pass the component's class name to your form's `focusableTypes` prop.
 
 #### Scrollable input widgets
 
 If you want your widget to receive scroll when showing keyboard, you must implement the following pattern:
 
-- Your widget should implement keyboard show management and call `this.props.onKeyboardShow({ height, y, keyboardHeight })` on keyboard show. `height` must be your widget's height, `y` must be your widget y position and `keyboardHeight` must be the currently open keyboard height.
-- Your widget should implement keyboard hide management and call `this.props.onKeyboardHide()` on keyboard hide.
-- Check [InlineTextInput](https://github.com/danielweinmann/react-native-stateless-form/blob/master/widgets/InlineTextInput.js) for references on how to implement it.
+- Your widget should implement `onFocus` and call `this.props.onFocus(scrollTo)` on focus. `scrollTo` must be your widget's `y` position.
+- You can get your `y` position using `onLayout` prop. Check [InlineTextInput](https://github.com/danielweinmann/react-native-stateless-form/blob/master/widgets/InlineTextInput.js) for references on how to implement it.
 
 ## Contributing
 

@@ -1,45 +1,25 @@
-import React, { Component, PropTypes, DeviceEventEmitter, View, Text, TextInput } from 'react-native'
+import React, { Component, PropTypes, View, Text, TextInput } from 'react-native'
 
 export default class InlineTextInput extends Component {
   componentDidMount() {
-    this.layout = { x: 0, y: 0, width: 0, height: 0 }
-    this.willShowKeyboard = false
-    this.isShowingKeyboard = false
-    DeviceEventEmitter.addListener('keyboardDidShow', this.handleKeyboardShow.bind(this))
-    DeviceEventEmitter.addListener('keyboardDidHide', this.handleKeyboardHide.bind(this))
+    this.scrollTo = 0
   }
 
   handleLayout(event) {
-    this.layout = event.nativeEvent.layout
+    this.scrollTo = event.nativeEvent.layout.y
   }
 
-  handleFocus(event) {
+  handleFocus() {
     const { onFocus } = this.props
-    this.willShowKeyboard = true
-    onFocus && onFocus()
-  }
-
-  handleKeyboardShow(frames) {
-    const keyboardHeight = frames.endCoordinates.height
-    const { height, y } = this.layout
-    if (this.willShowKeyboard) {
-      const { onKeyboardShow } = this.props
-      onKeyboardShow && onKeyboardShow({ height, y, keyboardHeight })
-      this.isShowingKeyboard = true
-      this.willShowKeyboard = false
-    }
-  }
-
-  handleKeyboardHide() {
-    if (this.isShowingKeyboard) {
-      const { onKeyboardHide } = this.props
-      onKeyboardHide && onKeyboardHide()
-      this.isShowingKeyboard = false
-    }
+    onFocus && onFocus(this.scrollTo)
   }
 
   focus() {
     this.refs.input.focus()
+  }
+
+  blur() {
+    this.refs.input.blur()
   }
 
   shouldDisplayMessage() {
@@ -49,7 +29,7 @@ export default class InlineTextInput extends Component {
 
   handleSubmitEditing() {
     const { nextInput, onNextInputFocus } = this.props
-    onNextInputFocus && onNextInputFocus(nextInput)
+    onNextInputFocus && onNextInputFocus(nextInput, this)
   }
 
   renderIcon() {
@@ -74,7 +54,7 @@ export default class InlineTextInput extends Component {
   }
 
   renderMessage() {
-    const { value, valid, message, messageStyle } = this.props
+    const { message, messageStyle } = this.props
     if (this.shouldDisplayMessage()) {
       return(
         <Text style={[{
@@ -90,7 +70,7 @@ export default class InlineTextInput extends Component {
   }
 
   render() {
-    const { title, value, valid, message, style, titleStyle, inputStyle, messageStyle, nextInput } = this.props
+    const { title, value, style, titleStyle, inputStyle, nextInput, onBlur } = this.props
     return (
       <View
         onLayout={this.handleLayout.bind(this)}
@@ -124,6 +104,7 @@ export default class InlineTextInput extends Component {
             onSubmitEditing={this.handleSubmitEditing.bind(this)}
             { ...this.props }
             onFocus={this.handleFocus.bind(this)}
+            onBlur={onBlur}
             ref='input'
             value={value}
             style={[{
