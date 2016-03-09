@@ -1,7 +1,7 @@
 # react-native-stateless-form
 
 * <h4>Never again worry about scrolling and focusing form fields.</h4>
-* #### Display icons and inline error messages with ease.
+* <h4>Display icons and inline error messages with ease.</h4>
 
 ## What it does
 
