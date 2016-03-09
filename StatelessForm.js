@@ -10,7 +10,7 @@ export default class StatelessForm extends Component {
     let nextInput = null
     let inputCount = 0
     return React.Children.map(this.props.children, (child) => child).reverse().map((child) => {
-      if (focusableTypes.indexOf(child.type.name) > -1) {
+      if (child.type.propTypes && child.type.propTypes.value && child.type.propTypes.valid) {
         inputCount++
         const input = React.cloneElement(child, {
           ref: `input${inputCount}`,
