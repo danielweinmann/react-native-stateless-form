@@ -8,14 +8,14 @@ It implements the most common pattern of mobile form user interaction by convens
 - It displays different icons for valid and invalid field values
 - It displays validation message inside the field
 - When a field receives focus, it displays a keyboard (\*)
-- If it is not the last field in the form, the keyboard return key is set to `Next`
+- If it is not the last field in the form, the keyboard return key is set to `Next` (\*\*)
 - If it is the last field in the form, the keyboard return key is set to `Done` and hides keaboard on return (\*\*)
 - When a field receives focus, the form scrolls to the top of the field to avoid it being hidden behind the keyboard
 - When all fields lose focus, the form scrolls back to the top of the form
 
 (\*) Unless an external keyboard is connected to the device
 
-(\*\*) In the future it might be set to `Go` and automatically submit the form on return
+(\*\*) On Android the return key button is always displayed as `Done` for now, since React Native does not support changing it yet. But the behaviour works on Android ;)
 
 ## What it does NOT do
 
@@ -168,6 +168,12 @@ class FormInput extends Component {
   }
 }
 
+// You MUST add these two props to propTypes in order to have auto-focus and auto-scroll working
+FormInput.propTypes = {
+  value: PropTypes.string,
+  valid: PropTypes.bool,
+}
+
 class Form extends Component {
   constructor(props, context) {
     super(props, context)
@@ -226,6 +232,7 @@ class Form extends Component {
 import { AppRegistry } from 'react-native'
 AppRegistry.registerComponent('Form', () => Form)
 ```
+
 #### Usage with validate-model
 
 ```js
@@ -294,6 +301,11 @@ class FormInput extends Component {
   }
 }
 
+FormInput.propTypes = {
+  value: PropTypes.string,
+  valid: PropTypes.bool,
+}
+
 class Form extends Component {
   constructor(props, context) {
     super(props, context)
@@ -346,6 +358,7 @@ class Form extends Component {
 import { AppRegistry } from 'react-native'
 AppRegistry.registerComponent('Form', () => Form)
 ```
+
 #### Usage with Redux Form
 
 ```js
@@ -420,6 +433,11 @@ class FormInput extends Component {
       />
     )
   }
+}
+
+FormInput.propTypes = {
+  value: PropTypes.string,
+  valid: PropTypes.bool,
 }
 
 class Form extends Component {
@@ -530,10 +548,10 @@ Any react component can be rendered inside Stateless Form as a widget. But there
 
 If you want your widget to receive focus when previous widget finished editing, you must implement the following pattern:
 
-- Your widget must have a component created with ES6 `class` statement.
 - Your widget should implement the `focus()` method.
 - Your widget should implement the `blur()` method.
 - Your widget should implement `onSubmitEditing` or equivalent and call `this.props.onNextInputFocus(this.props.nextInput, this)` so StatelessForm can focus the next input or blur the current input.
+- Your widget must have `valid` and `value` on its `propTypes`. This is how `StatelessForm` will recognize it as a focusable and/or scrollable input widget. It is important that only focusable or scrollable widgets have these props on `propTypes`.
 
 #### Scrollable input widgets
 
@@ -541,6 +559,8 @@ If you want your widget to receive scroll when showing keyboard, you must implem
 
 - Your widget should implement `onFocus` and call `this.props.onFocus(scrollTo)` on focus. `scrollTo` must be your widget's `y` position.
 - You can get your `y` position using `onLayout` prop. Check [InlineTextInput](https://github.com/danielweinmann/react-native-stateless-form/blob/master/widgets/InlineTextInput.js) for references on how to implement it.
+- Your widget should implement `onBlur` and call `this.props.onBlur` on blur.
+- Your widget also must have `valid` and `value` on its `propTypes`.
 
 ## Contributing
 
