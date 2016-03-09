@@ -140,7 +140,7 @@ AppRegistry.registerComponent('Form', () => Form)
 #### Create your own widget to keep it DRY
 
 ```js
-import React, { Component } from 'react-native'
+import React, { Component, PropTypes } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
 
@@ -240,7 +240,7 @@ AppRegistry.registerComponent('Form', () => Form)
 #### Usage with validate-model
 
 ```js
-import React, { Component } from 'react-native'
+import React, { Component, PropTypes } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
 import { validate } from 'validate-model'
@@ -366,7 +366,7 @@ AppRegistry.registerComponent('Form', () => Form)
 #### Usage with Redux Form
 
 ```js
-import React, { Component } from 'react-native'
+import React, { Component, PropTypes } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
 import { validateAll } from 'validate-model'
