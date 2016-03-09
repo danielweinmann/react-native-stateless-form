@@ -6,7 +6,6 @@ export default class StatelessForm extends Component {
   }
 
   childrenWithProps() {
-    const { focusableTypes } = this.props
     let nextInput = null
     let inputCount = 0
     return React.Children.map(this.props.children, (child) => child).reverse().map((child) => {
@@ -68,11 +67,9 @@ export default class StatelessForm extends Component {
 }
 
 StatelessForm.propTypes = {
-  focusableTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   style: PropTypes.object,
 }
 
 StatelessForm.defaultProps = {
-  focusableTypes: ['InlineTextInput'],
   style: {},
 }

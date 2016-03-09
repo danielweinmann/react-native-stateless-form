@@ -184,12 +184,7 @@ class Form extends Component {
     const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
     const passwordValid = (password && password.length >= 8 ? true : false)
     return (
-      <StatelessForm
-        // You MUST add this prop for your widget to be considered
-        // an input and therefore manage focusing correctly
-        focusableTypes={['InlineTextInput', 'FormInput']}
-        style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}
-      >
+      <StatelessForm style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}>
         <FormInput
           title='Name'
           placeholder='Tell us your name'
@@ -312,10 +307,7 @@ class Form extends Component {
   render() {
     const { name, email, password } = this.state
     return (
-      <StatelessForm
-        focusableTypes={['InlineTextInput', 'FormInput']}
-        style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}
-      >
+      <StatelessForm style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}>
         <FormInput
           name='name'
           title='Name'
@@ -434,10 +426,7 @@ class Form extends Component {
   render() {
     const { fields: { name, email, password } } = this.props
     return (
-      <StatelessForm
-        focusableTypes={['InlineTextInput', 'FormInput']}
-        style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}
-      >
+      <StatelessForm style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}>
         <FormInput
           name='name'
           title='Name'
@@ -502,7 +491,6 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
-| focusableTypes | Array of string | ['InlineTextInput'] | A list of focusable widget types |
 | style | object | {} | Style for the form wrapper |
 
 \+ Any other [ScrollView](https://facebook.github.io/react-native/docs/scrollview.html#content) prop you wish to pass.
@@ -546,7 +534,6 @@ If you want your widget to receive focus when previous widget finished editing, 
 - Your widget should implement the `focus()` method.
 - Your widget should implement the `blur()` method.
 - Your widget should implement `onSubmitEditing` or equivalent and call `this.props.onNextInputFocus(this.props.nextInput, this)` so StatelessForm can focus the next input or blur the current input.
-- You must pass the component's class name to your form's `focusableTypes` prop.
 
 #### Scrollable input widgets
 
