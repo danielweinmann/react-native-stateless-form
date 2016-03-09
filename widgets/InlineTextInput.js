@@ -134,9 +134,6 @@ InlineTextInput.propTypes = {
   icon: PropTypes.element,
   validIcon: PropTypes.element,
   invalidIcon: PropTypes.element,
-  nextInput: PropTypes.element,
-  onNextInputFocus: PropTypes.func,
-  onKeyboardShow: PropTypes.func,
 }
 
 InlineTextInput.defaultProps = {
@@ -152,7 +149,4 @@ InlineTextInput.defaultProps = {
   icon: null,
   validIcon: null,
   invalidIcon: null,
-  nextInput: null,
-  onNextInputFocus: null,      
-  onKeyboardShow: null,      
 }
