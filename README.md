@@ -4,6 +4,8 @@
 * <h4>Display icons and inline error messages with ease.</h4>
 * <h4>Use any form state management tool you want</h4>
 
+<iframe src='https://gfycat.com/ifr/WanBruisedGoldenmantledgroundsquirrel' frameborder='0' scrolling='no' width='640' height='1164' allowfullscreen></iframe>
+
 ## What it does
 
 It implements the most common pattern of mobile form user interaction by convension over configuration. You'll never have to worry again about scrolling and focusing form fields.
