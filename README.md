@@ -15,7 +15,7 @@ It implements the most common pattern of mobile form user interaction by convens
 
 (\*) Unless an external keyboard is connected to the device
 
-(\*\*) On Android the return key button is always displayed as `Done` for now, since React Native does not support changing it yet. But the behaviour works on Android ;)
+(\*\*) On Android the return key button is always displayed as `Done` for now, since React Native does not support changing it yet. But the behaviour works correctly ;)
 
 ## What it does NOT do
 
