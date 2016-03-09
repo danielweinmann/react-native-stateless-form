@@ -1,8 +1,11 @@
 # react-native-stateless-form
 
+* #### Never again worry about scrolling and focusing form fields.
+* #### Display icons and inline error messages with ease.
+
 ## What it does
 
-It implements the most common pattern of mobile form user interaction by convension over configuration. You'll never have to worry again about positioning and focusing form fields.
+It implements the most common pattern of mobile form user interaction by convension over configuration. You'll never have to worry again about scrolling and focusing form fields.
 
 - It uses inline form fields with icons and titles
 - It displays different icons for valid and invalid field values
