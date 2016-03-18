@@ -162,7 +162,7 @@ class FormInput extends Component {
     const { iconName } = this.props
     return (
       <InlineTextInput
-        ref='input' // This is necessary for focus() implementation to work
+        ref='input' // This is necessary for focus() and blur() implementation to work
         style={{ borderColor: 'gray' }}
         titleStyle={{ color: 'dimgray' }}
         inputStyle={{ color: 'slategray' }}
@@ -523,7 +523,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 
 ## Widgets
 
-#### TextInput
+#### InlineTextInput
 
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
