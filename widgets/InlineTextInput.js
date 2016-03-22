@@ -121,16 +121,21 @@ export default class InlineTextInput extends Component {
   }
 }
 
+const stylePropType = PropTypes.oneOfType([
+  React.PropTypes.object,
+  React.PropTypes.arrayOf(React.PropTypes.object),
+])
+
 InlineTextInput.propTypes = {
   title: PropTypes.string,
   value: PropTypes.string,
   valid: PropTypes.bool,
   message: PropTypes.string,
-  style: PropTypes.object,
-  iconStyle: PropTypes.object,
-  titleStyle: PropTypes.object,
-  inputStyle: PropTypes.object,
-  messageStyle: PropTypes.object,
+  style: stylePropType,
+  iconStyle: stylePropType,
+  titleStyle: stylePropType,
+  inputStyle: stylePropType,
+  messageStyle: stylePropType,
   icon: PropTypes.element,
   validIcon: PropTypes.element,
   invalidIcon: PropTypes.element,

@@ -517,7 +517,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
-| style | object | {} | Style for the form wrapper |
+| style | style | {} | Style for the form wrapper |
 
 \+ Any other [ScrollView](https://facebook.github.io/react-native/docs/scrollview.html#content) prop you wish to pass.
 
@@ -531,11 +531,11 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 | value | string | null | Value for the text input |
 | valid | boolean | false | Whether the value is valid or not |
 | message | string | null | Validation message to be shown |
-| style | object | {} | Style changes to the main ScrollView |
-| iconStyle | object | {} | Style changes to the icon View |
-| titleStyle | object | {} | Style changes to the title Text |
-| inputStyle | object | {} | Style changes to the TextInput |
-| messageStyle | object | {} | Style changes to the validation message Text |
+| style | style | {} | Style changes to the main ScrollView |
+| iconStyle | style | {} | Style changes to the icon View |
+| titleStyle | style | {} | Style changes to the title Text |
+| inputStyle | style | {} | Style changes to the TextInput |
+| messageStyle | style | {} | Style changes to the validation message Text |
 | icon | element | null | Any react component to be used as icon |
 | validIcon | element | null | Any react component to be used as icon when valid. Requires `icon` prop |
 | invalidIcon | element | null | Any react component to be used as icon when invalid. Requires `icon` prop |
