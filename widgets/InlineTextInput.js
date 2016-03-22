@@ -70,7 +70,7 @@ export default class InlineTextInput extends Component {
   }
 
   render() {
-    const { title, value, style, titleStyle, inputStyle, nextInput, onBlur } = this.props
+    const { title, value, style, titleStyle, inputStyle, nextInput, onBlur, multiline } = this.props
     return (
       <View
         onLayout={this.handleLayout.bind(this)}
@@ -100,7 +100,7 @@ export default class InlineTextInput extends Component {
           </Text>
           <TextInput
             clearButtonMode='while-editing'
-            returnKeyType={ nextInput ? 'next' : 'done' }
+            returnKeyType={ multiline ? 'default' : (nextInput ? 'next' : 'done') }
             onSubmitEditing={this.handleSubmitEditing.bind(this)}
             { ...this.props }
             onFocus={this.handleFocus.bind(this)}
