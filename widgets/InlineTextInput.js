@@ -106,7 +106,7 @@ export default class InlineTextInput extends Component {
             onFocus={this.handleFocus.bind(this)}
             onBlur={onBlur}
             ref='input'
-            value={isNaN(value) ? value : value.toString()}
+            value={isNaN(value) ? value : value ? value.toString() : null}
             style={[{
               flex: 1,
               height: 36,
