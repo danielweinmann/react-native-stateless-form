@@ -76,8 +76,8 @@ export default class InlineTextInput extends Component {
         onLayout={this.handleLayout.bind(this)}
         style={[{
           backgroundColor: 'white',
-          borderTopWidth: 0.5,
-          borderBottomWidth: (nextInput ? 0 : 0.5),
+          borderTopWidth: 1,
+          borderBottomWidth: (nextInput ? 0 : 1),
           borderColor: 'lightgray',
         }, style]}
       >
@@ -90,7 +90,7 @@ export default class InlineTextInput extends Component {
           { this.renderIcon() }
           <Text
             style={[{
-              flex: 0.5,
+              flex: 1,
               fontSize: 14,
               fontWeight: 'bold',
               marginLeft: 6,
