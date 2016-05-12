@@ -90,7 +90,7 @@ export default class InlineTextInput extends Component {
           { this.renderIcon() }
           <Text
             style={[{
-              flex: 1,
+              flex: 0.5,
               fontSize: 14,
               fontWeight: 'bold',
               marginLeft: 6,
