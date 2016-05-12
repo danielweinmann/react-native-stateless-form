@@ -23,8 +23,8 @@ export default class InlineTextInput extends Component {
   }
 
   shouldDisplayMessage() {
-    const { value, valid, message } = this.props
-    return (value && value.length > 0 && !valid && message)
+    const { touched, valid, message } = this.props
+    return (touched && !valid && message)
   }
 
   handleSubmitEditing() {
@@ -37,7 +37,7 @@ export default class InlineTextInput extends Component {
     if (!icon)
       return
     let renderedIcon = null
-    if (value && value.length > 0) {
+    if (value) {
       renderedIcon = (valid ? (validIcon ? validIcon : icon) : (invalidIcon ? invalidIcon : icon))
     } else {
       renderedIcon = icon
