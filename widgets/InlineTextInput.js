@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, View, Text, TextInput } from 'react-native'
+import React from 'react';
+import { Component, PropTypes, View, Text, TextInput, StyleSheet } from 'react-native'
 
 export default class InlineTextInput extends Component {
   componentDidMount() {
@@ -70,14 +71,16 @@ export default class InlineTextInput extends Component {
   }
 
   render() {
+		console.log(nextInput, "<<<< next");
+
     const { title, value, style, titleStyle, inputStyle, nextInput, onBlur, multiline } = this.props
     return (
       <View
         onLayout={this.handleLayout.bind(this)}
         style={[{
           backgroundColor: 'white',
-          borderTopWidth: 0.5,
-          borderBottomWidth: (nextInput ? 0 : 0.5),
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderBottomWidth: (nextInput ? 0 : StyleSheet.hairlineWidth),
           borderColor: 'lightgray',
         }, style]}
       >

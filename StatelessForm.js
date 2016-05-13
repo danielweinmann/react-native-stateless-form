@@ -1,4 +1,5 @@
-import React, { Platform, Component, PropTypes, ScrollView, View } from 'react-native'
+import React from 'react';
+import { Platform, Component, PropTypes, ScrollView, View } from 'react-native'
 
 export default class StatelessForm extends Component {
   componentDidMount() {
@@ -9,8 +10,9 @@ export default class StatelessForm extends Component {
     let nextInput = null
     let inputCount = 0
     return React.Children.map(this.props.children, (child) => child).reverse().map((child) => {
-      if (child.type.propTypes && child.type.propTypes.value && child.type.propTypes.valid) {
+			if (typeof child.props.value !== 'undefined') {
         inputCount++
+
         const input = React.cloneElement(child, {
           ref: `input${inputCount}`,
           nextInput: nextInput,
@@ -20,9 +22,9 @@ export default class StatelessForm extends Component {
         })
         nextInput = input
         return input
-      } else {
-        return child
-      }
+			} else {
+				return child
+			}
     }).reverse()
   }
 
