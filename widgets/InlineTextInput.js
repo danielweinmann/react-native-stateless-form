@@ -71,8 +71,6 @@ export default class InlineTextInput extends Component {
   }
 
   render() {
-		console.log(nextInput, "<<<< next");
-
     const { title, value, style, titleStyle, inputStyle, nextInput, onBlur, multiline } = this.props
     return (
       <View
