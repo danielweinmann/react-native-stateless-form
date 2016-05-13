@@ -1,157 +1,214 @@
-import React, { Component, PropTypes, View, Text, TextInput } from 'react-native'
+import React from 'react';
+import {
+	Component,
+	PropTypes,
+	StyleSheet,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	View,
+} from 'react-native';
 
+let styles;
 export default class InlineTextInput extends Component {
-  componentDidMount() {
-    this.scrollTo = 0
-  }
+	componentDidMount() {
+		this.scrollTo = 0;
+	}
 
-  handleLayout(event) {
-    this.scrollTo = event.nativeEvent.layout.y
-  }
+	handleLayout = (event) => {
+		this.scrollTo = event.nativeEvent.layout.y;
+	};
 
-  handleFocus() {
-    const { onFocus } = this.props
-    onFocus && onFocus(this.scrollTo)
-  }
+	handleFocus = (e) => {
+		const { onFocus, postFocus } = this.props;
+		if (onFocus) onFocus(e);
+		postFocus(this.scrollTo);
+	};
 
-  focus() {
-    this.refs.input.focus()
-  }
+	handleBlur = (e) => {
+		const { onBlur, postBlur } = this.props;
+		if (onBlur) onBlur(e);
+		postBlur();
+	};
 
-  blur() {
-    this.refs.input.blur()
-  }
+	focus = () => {
+		this.refs.input.focus();
+	};
 
-  shouldDisplayMessage() {
-    const { value, valid, message } = this.props
-    return (value && value.length > 0 && !valid && message)
-  }
+	blur = () => {
+		this.refs.input.blur();
+	};
 
-  handleSubmitEditing() {
-    const { nextInput, onNextInputFocus } = this.props
-    onNextInputFocus && onNextInputFocus(nextInput, this)
-  }
+	shouldDisplayMessage() {
+		const { touched, valid, message } = this.props;
+		return (touched && !valid && !!message);
+	}
 
-  renderIcon() {
-    const { icon, validIcon, invalidIcon, valid, value, iconStyle } = this.props
-    if (!icon)
-      return
-    let renderedIcon = null
-    if (value && value.length > 0) {
-      renderedIcon = (valid ? (validIcon ? validIcon : icon) : (invalidIcon ? invalidIcon : icon))
-    } else {
-      renderedIcon = icon
-    }
-    return (
-      <View
-        style={[{
-          marginLeft: 6,
-        }, iconStyle]}
-      >
-        {renderedIcon}
-      </View>
-    )
-  }
+	handleSubmitEditing = () => {
+		const { nextInput, onNextInputFocus } = this.props;
+		onNextInputFocus(nextInput, this);
+	};
 
-  renderMessage() {
-    const { message, messageStyle } = this.props
-    if (this.shouldDisplayMessage()) {
-      return(
-        <Text style={[{
-          color: 'red',
-          marginLeft: 10,
-          marginBottom: 10,
-          fontSize: 12,
-        }, messageStyle]}>
-          { message }
-        </Text>
-      )
-    }
-  }
+	renderIcon() {
+		const { icon, validIcon, invalidIcon, valid, value, iconStyle } = this.props;
+		if (!icon) return null;
 
-  render() {
-    const { title, value, style, titleStyle, inputStyle, nextInput, onBlur, multiline } = this.props
-    return (
-      <View
-        onLayout={this.handleLayout.bind(this)}
-        style={[{
-          backgroundColor: 'white',
-          borderTopWidth: 0.5,
-          borderBottomWidth: (nextInput ? 0 : 0.5),
-          borderColor: 'lightgray',
-        }, style]}
-      >
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingTop: 6,
-          paddingBottom: (this.shouldDisplayMessage() ? 0 : 6)
-        }}>
-          { this.renderIcon() }
-          <Text
-            style={[{
-              flex: 0.5,
-              fontSize: 14,
-              fontWeight: 'bold',
-              marginLeft: 6,
-            }, titleStyle]}
-          >
-            {title}
-          </Text>
-          <TextInput
-            clearButtonMode='while-editing'
-            returnKeyType={ multiline ? 'default' : (nextInput ? 'next' : 'done') }
-            onSubmitEditing={this.handleSubmitEditing.bind(this)}
-            { ...this.props }
-            onFocus={this.handleFocus.bind(this)}
-            onBlur={onBlur}
-            ref='input'
-            value={value}
-            style={[{
-              flex: 1,
-              height: 36,
-              fontSize: 14,
-              backgroundColor: 'white',
-            }, inputStyle]}
-          />
-        </View>
-        { this.renderMessage() }
-      </View>
-    )
-  }
+		let renderedIcon = null;
+		if (value && value.length > 0) {
+			if (valid) {
+				renderedIcon = validIcon || icon;
+			} else {
+				renderedIcon = invalidIcon || icon;
+			}
+		} else {
+			renderedIcon = icon;
+		}
+		return (
+			<View style={ [styles.icon, iconStyle] } >
+				{ renderedIcon }
+			</View>
+		);
+	}
+
+	renderMessage() {
+		const { message, messageStyle } = this.props;
+		if (!this.shouldDisplayMessage()) return null;
+		return (
+			<Text style={ [styles.message, messageStyle] }>
+				{ message }
+			</Text>
+		);
+	}
+
+	render() {
+		const {
+			title,
+			value,
+			style,
+			titleStyle,
+			inputStyle,
+			nextInput,
+			multiline,
+		} = this.props;
+
+		let returnKeyType;
+		if (multiline) {
+			returnKeyType = 'default';
+		} else if (nextInput) {
+			returnKeyType = 'next';
+		} else {
+			returnKeyType = 'done';
+		}
+		return (
+			<TouchableOpacity onPress={ this.focus }>
+				<View
+					onLayout={ this.handleLayout }
+					style={ [{
+						borderBottomWidth: (nextInput ? 0 : StyleSheet.hairlineWidth),
+					}, styles.container, style] }
+				>
+					<View
+						style={ [
+							styles.inputContainer,
+							{ paddingBottom: (this.shouldDisplayMessage() ? 0 : 6) },
+						] }
+					>
+						{ this.renderIcon() }
+						<Text
+							style={ [styles.title, titleStyle] }
+						>
+							{ title }
+						</Text>
+						<TextInput
+							clearButtonMode="while-editing"
+							returnKeyType={ returnKeyType }
+							onSubmitEditing={ this.handleSubmitEditing }
+							{ ...this.props }
+							onFocus={ this.handleFocus }
+							onBlur={ this.handleBlur }
+							ref="input"
+							value={ value }
+							style={ [styles.input, inputStyle] }
+						/>
+					</View>
+					{ this.renderMessage() }
+				</View>
+			</TouchableOpacity>
+		);
+	}
 }
 
 const stylePropType = PropTypes.oneOfType([
-  React.PropTypes.object,
-  React.PropTypes.arrayOf(React.PropTypes.object),
-])
+	React.PropTypes.object,
+	React.PropTypes.arrayOf(React.PropTypes.object),
+]);
 
 InlineTextInput.propTypes = {
-  title: PropTypes.string,
-  value: PropTypes.string,
-  valid: PropTypes.bool,
-  message: PropTypes.string,
-  style: stylePropType,
-  iconStyle: stylePropType,
-  titleStyle: stylePropType,
-  inputStyle: stylePropType,
-  messageStyle: stylePropType,
-  icon: PropTypes.element,
-  validIcon: PropTypes.element,
-  invalidIcon: PropTypes.element,
-}
+	title: PropTypes.string,
+	value: PropTypes.string,
+	valid: PropTypes.bool,
+	message: PropTypes.string,
+	style: stylePropType,
+	iconStyle: stylePropType,
+	titleStyle: stylePropType,
+	inputStyle: stylePropType,
+	messageStyle: stylePropType,
+	icon: PropTypes.element,
+	validIcon: PropTypes.element,
+	invalidIcon: PropTypes.element,
+	onBlur: PropTypes.func,
+	postBlur: PropTypes.func,
+	onFocus: PropTypes.func,
+	postFocus: PropTypes.func,
+	touched: PropTypes.bool,
+	nextInput: PropTypes.node,
+	onNextInputFocus: PropTypes.func,
+	multiline: PropTypes.bool,
+};
 
 InlineTextInput.defaultProps = {
-  title: 'Use title prop',
-  value: null,
-  valid: false,
-  message: null,
-  style: {},
-  iconStyle: {},
-  titleStyle: {},
-  inputStyle: {},
-  messageStyle: {},
-  icon: null,
-  validIcon: null,
-  invalidIcon: null,
-}
+	title: 'Use title prop',
+	value: null,
+	valid: false,
+	message: null,
+	style: {},
+	iconStyle: {},
+	titleStyle: {},
+	inputStyle: {},
+	messageStyle: {},
+	icon: null,
+	validIcon: null,
+	invalidIcon: null,
+};
+
+styles = StyleSheet.create({ // eslint-disable-line
+	container: {
+		backgroundColor: 'white',
+		borderTopWidth: StyleSheet.hairlineWidth,
+		borderColor: 'lightgray',
+	},
+	inputContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingTop: 6,
+	},
+	icon: { marginLeft: 6 },
+	title: {
+		flex: 0.5,
+		fontSize: 14,
+		fontWeight: 'bold',
+		marginLeft: 6,
+	},
+	message: {
+		color: 'red',
+		marginLeft: 10,
+		marginBottom: 10,
+		fontSize: 12,
+	},
+	input: {
+		flex: 1,
+		height: 36,
+		fontSize: 14,
+		backgroundColor: 'white',
+	},
+});
