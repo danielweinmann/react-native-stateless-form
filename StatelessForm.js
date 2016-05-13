@@ -22,9 +22,9 @@ export default class StatelessForm extends Component {
         })
         nextInput = input
         return input
-			} else {
-				return child
-			}
+      } else {
+        return child
+      }
     }).reverse()
   }
 
