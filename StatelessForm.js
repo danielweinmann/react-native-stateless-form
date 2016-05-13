@@ -78,6 +78,7 @@ export default class StatelessForm extends Component {
 StatelessForm.propTypes = {
 	children: PropTypes.node,
 	style: PropTypes.oneOfType([
+		React.PropTypes.number,
 		React.PropTypes.object,
 		React.PropTypes.arrayOf(React.PropTypes.object),
 	]),
