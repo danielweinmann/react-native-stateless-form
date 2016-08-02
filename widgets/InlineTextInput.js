@@ -54,17 +54,21 @@ export default class InlineTextInput extends Component {
   }
 
   renderMessage() {
-    const { message, messageStyle } = this.props
+    const { message, messageStyle, style } = this.props
     if (this.shouldDisplayMessage()) {
       return(
-        <Text style={[{
-          color: 'red',
-          marginLeft: 10,
-          marginBottom: 10,
-          fontSize: 12,
-        }, messageStyle]}>
-          { message }
-        </Text>
+        <View style={{
+          backgroundColor: (style && style.backgroundColor ? style.backgroundColor : 'white')
+        }}>
+          <Text style={[{
+            color: 'red',
+            marginLeft: 10,
+            marginBottom: 10,
+            fontSize: 12,
+          }, messageStyle]}>
+            { message }
+          </Text>
+        </View>
       )
     }
   }
@@ -85,7 +89,8 @@ export default class InlineTextInput extends Component {
           flexDirection: 'row',
           alignItems: 'center',
           paddingTop: 6,
-          paddingBottom: (this.shouldDisplayMessage() ? 0 : 6)
+          paddingBottom: (this.shouldDisplayMessage() ? 0 : 6),
+          backgroundColor: (style && style.backgroundColor ? style.backgroundColor : 'white'),
         }}>
           { this.renderIcon() }
           <Text
