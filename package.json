@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/danielweinmann/react-native-stateless-form.git"
   },
+  "engines": {
+    "npm": "^3"
+  },
   "keywords": [
     "react",
     "native",
@@ -26,5 +29,9 @@
   "bugs": {
     "url": "https://github.com/danielweinmann/react-native-stateless-form/issues"
   },
-  "homepage": "https://github.com/danielweinmann/react-native-stateless-form#readme"
+  "homepage": "https://github.com/danielweinmann/react-native-stateless-form#readme",
+  "peerDependencies": {
+    "react": ">=0.14.5",
+    "react-native": ">=0.22"
+  }
 }
