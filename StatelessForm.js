@@ -1,4 +1,5 @@
-import React, { Platform, Component, PropTypes, ScrollView, View } from 'react-native'
+import React, { Component, PropTypes } from 'react';
+import { Platform, ScrollView, View } from 'react-native'
 
 export default class StatelessForm extends Component {
   componentDidMount() {
