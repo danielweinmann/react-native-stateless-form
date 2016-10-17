@@ -1,4 +1,5 @@
-import React, { Platform, Component, PropTypes, ScrollView, View } from 'react-native'
+import React, { Component, PropTypes } from 'react';
+import { Platform, ScrollView, View } from 'react-native'
 
 export default class StatelessForm extends Component {
   componentDidMount() {
@@ -60,7 +61,7 @@ export default class StatelessForm extends Component {
         }, this.props.style]}
       >
         {this.childrenWithProps()}
-        { Platform.OS == 'android' && <View style={{ height: 500 }}/> }
+        { Platform.OS == 'android' && <View style={{ height: this.props.androidOnlyViewHeight }}/> }
       </ScrollView>
     )
   }  
@@ -71,8 +72,10 @@ StatelessForm.propTypes = {
     React.PropTypes.object,
     React.PropTypes.arrayOf(React.PropTypes.object),
   ]),
+  androidOnlyViewHeight: PropTypes.number,
 }
 
 StatelessForm.defaultProps = {
   style: {},
+  androidOnlyViewHeight: 500,
 }

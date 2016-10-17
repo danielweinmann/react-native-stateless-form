@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, View, Text, TextInput } from 'react-native'
+import React, { Component, PropTypes } from 'react';
+import { View, Text, TextInput } from 'react-native'
 
 export default class InlineTextInput extends Component {
   componentDidMount() {
