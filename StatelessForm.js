@@ -60,7 +60,6 @@ export default class StatelessForm extends Component {
         }, this.props.style]}
       >
         {this.childrenWithProps()}
-        { Platform.OS == 'android' && <View style={{ height: 500 }}/> }
       </ScrollView>
     )
   }  
