@@ -33,7 +33,7 @@ It implements the most common pattern of mobile form user interaction by convens
 
 ## Support
 
-- React Native 0.20+
+- React Native 0.25+
 - iOS
 - Android (see installation below)
 
