@@ -141,7 +141,7 @@ import { AppRegistry } from 'react-native'
 AppRegistry.registerComponent('Form', () => Form)
 ```
 
-#### Create your own widget to keep it DRY
+#### Create your own component to keep it DRY
 
 ```js
 import React, { Component, PropTypes } from 'react-native'
@@ -149,7 +149,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { StatelessForm, InlineTextInput } from 'react-native-stateless-form'
 
 class FormInput extends Component {
-  // You MUST implement focus and blur methods for your widget to work
+  // You MUST implement focus and blur methods for your component to work
   focus() {
     this.refs.input.focus()
   }
@@ -513,7 +513,7 @@ AppRegistry.registerComponent('Form', () => Root)
 
 ## StatelessForm
 
-A wrapper that will manage auto-focusing and auto-scrolling for its children widgets
+A wrapper that will manage auto-focusing and auto-scrolling for its children components
 
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
@@ -521,7 +521,7 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 
 \+ Any other [ScrollView](https://facebook.github.io/react-native/docs/scrollview.html#content) prop you wish to pass.
 
-## Widgets
+## Components
 
 #### InlineTextInput
 
@@ -542,33 +542,33 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children wid
 
 \+ Any other [TextInput](https://facebook.github.io/react-native/docs/textinput.html#content) prop you wish to pass.
 
-#### Other widgets
+#### Other components
 
-My intention is to implement most of [FaridSafi/react-native-gifted-form](https://github.com/FaridSafi/react-native-gifted-form)'s widgets. But I'll do each one only when I need it in a real project, so it might take some time.
+My intention is to implement most of [FaridSafi/react-native-gifted-form](https://github.com/FaridSafi/react-native-gifted-form)'s components. But I'll do each one only when I need it in a real project, so it might take some time.
 
 PR's are very much welcome!
 
-## Creating new widgets
+## Creating new components
 
-Any react component can be rendered inside Stateless Form as a widget. But there is a special case below:
+Any react component can be rendered inside Stateless Form as a component. But there is a special case below:
 
-#### Focusable input widgets
+#### Focusable input components
 
-If you want your widget to receive focus when previous widget finished editing, you must implement the following pattern:
+If you want your component to receive focus when previous component finished editing, you must implement the following pattern:
 
-- Your widget should implement the `focus()` method.
-- Your widget should implement the `blur()` method.
-- Your widget should implement `onSubmitEditing` or equivalent and call `this.props.onNextInputFocus(this.props.nextInput, this)` so StatelessForm can focus the next input or blur the current input.
-- Your widget must have `valid` and `value` on its `propTypes`. This is how `StatelessForm` will recognize it as a focusable and/or scrollable input widget. It is important that only focusable or scrollable widgets have these props on `propTypes`.
+- Your component should implement the `focus()` method.
+- Your component should implement the `blur()` method.
+- Your component should implement `onSubmitEditing` or equivalent and call `this.props.onNextInputFocus(this.props.nextInput, this)` so StatelessForm can focus the next input or blur the current input.
+- Your component must have `valid` and `value` on its `propTypes`. This is how `StatelessForm` will recognize it as a focusable and/or scrollable input component. It is important that only focusable or scrollable components have these props on `propTypes`.
 
-#### Scrollable input widgets
+#### Scrollable input components
 
-If you want your widget to receive scroll when showing keyboard, you must implement the following pattern:
+If you want your component to receive scroll when showing keyboard, you must implement the following pattern:
 
-- Your widget should implement `onFocus` and call `this.props.onFocus(scrollTo)` on focus. `scrollTo` must be your widget's `y` position.
-- You can get your `y` position using `onLayout` prop. Check [InlineTextInput](https://github.com/danielweinmann/react-native-stateless-form/blob/master/widgets/InlineTextInput.js) for references on how to implement it.
-- Your widget should implement `onBlur` and call `this.props.onBlur` on blur.
-- Your widget also must have `valid` and `value` on its `propTypes`.
+- Your component should implement `onFocus` and call `this.props.onFocus(scrollTo)` on focus. `scrollTo` must be your component's `y` position.
+- You can get your `y` position using `onLayout` prop. Check [InlineTextInput](https://github.com/danielweinmann/react-native-stateless-form/blob/master/components/InlineTextInput.js) for references on how to implement it.
+- Your component should implement `onBlur` and call `this.props.onBlur` on blur.
+- Your component also must have `valid` and `value` on its `propTypes`.
 
 ## Contributing
 

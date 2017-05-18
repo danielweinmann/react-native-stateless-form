@@ -1,4 +1,4 @@
 import StatelessForm from './StatelessForm'
-import InlineTextInput from './widgets/InlineTextInput'
+import InlineTextInput from './components/InlineTextInput'
 
 module.exports = { StatelessForm, InlineTextInput }
