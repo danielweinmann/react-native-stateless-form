@@ -76,7 +76,7 @@ export default class InlineTextInput extends Component {
   }
 
   render() {
-    const { title, value, titleStyle, inputStyle, nextInput, onBlur, multiline } = this.props
+    const { label, value, labelStyle, inputStyle, nextInput, onBlur, multiline } = this.props
     const style = StyleSheet.flatten(this.props.style)
     return (
       <View
@@ -102,9 +102,9 @@ export default class InlineTextInput extends Component {
               fontSize: 14,
               fontWeight: 'bold',
               marginLeft: 6,
-            }, titleStyle]}
+            }, labelStyle]}
           >
-            {title}
+            {label}
           </Text>
           <TextInput
             clearButtonMode='while-editing'
@@ -136,13 +136,13 @@ const stylePropType = PropTypes.oneOfType([
 ])
 
 InlineTextInput.propTypes = {
-  title: PropTypes.string,
+  label: PropTypes.string,
   value: PropTypes.string,
   valid: PropTypes.bool,
   message: PropTypes.string,
   style: stylePropType,
   iconStyle: stylePropType,
-  titleStyle: stylePropType,
+  labelStyle: stylePropType,
   inputStyle: stylePropType,
   messageStyle: stylePropType,
   icon: PropTypes.element,
@@ -151,13 +151,13 @@ InlineTextInput.propTypes = {
 }
 
 InlineTextInput.defaultProps = {
-  title: 'Use title prop',
+  label: 'Use label prop',
   value: null,
   valid: false,
   message: null,
   style: {},
   iconStyle: {},
-  titleStyle: {},
+  labelStyle: {},
   inputStyle: {},
   messageStyle: {},
   icon: null,

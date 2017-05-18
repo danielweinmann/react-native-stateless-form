@@ -12,7 +12,7 @@
 
 It implements the most common pattern of mobile form user interaction by convension over configuration. You'll never have to worry again about scrolling and focusing form fields.
 
-- It uses inline form fields with icons and titles
+- It uses inline form fields with icons and labels
 - It displays different icons for valid and invalid field values
 - It displays validation message inside the field
 - When a field receives focus, it displays a keyboard (\*)
@@ -82,10 +82,10 @@ class Form extends Component {
         backgroundColor: 'lightgray',
       }}>
         <InlineTextInput
-          title='Name'
+          label='Name'
           placeholder='Tell us your name'
           style={{ borderColor: 'gray' }}
-          titleStyle={{ color: 'dimgray' }}
+          labelStyle={{ color: 'dimgray' }}
           inputStyle={{ color: 'slategray' }}
           messageStyle={{ color: 'red' }}
           icon={ <Icon name={'account-circle'} size={18} color={'steelblue'} /> }
@@ -97,13 +97,13 @@ class Form extends Component {
           onChangeText={(text) => { this.setState({name: text}) }}
         />
         <InlineTextInput
-          title='Email'
+          label='Email'
           placeholder='type@your.email'
           autoCorrect={false}
           autoCapitalize='none'
           keyboardType='email-address'
           style={{ borderColor: 'gray' }}
-          titleStyle={{ color: 'dimgray' }}
+          labelStyle={{ color: 'dimgray' }}
           inputStyle={{ color: 'slategray' }}
           messageStyle={{ color: 'red' }}
           icon={ <Icon name={'mail-outline'} size={18} color={'steelblue'} /> }
@@ -115,13 +115,13 @@ class Form extends Component {
           onChangeText={(text) => { this.setState({email: text}) }}
         />
         <InlineTextInput
-          title='Password'
+          label='Password'
           placeholder='Create a password'
           autoCorrect={false}
           autoCapitalize='none'
           secureTextEntry={true}
           style={{ borderColor: 'gray' }}
-          titleStyle={{ color: 'dimgray' }}
+          labelStyle={{ color: 'dimgray' }}
           inputStyle={{ color: 'slategray' }}
           messageStyle={{ color: 'red' }}
           icon={ <Icon name={'vpn-key'} size={18} color={'steelblue'} /> }
@@ -164,7 +164,7 @@ class FormInput extends Component {
       <InlineTextInput
         ref='input' // This is necessary for focus() and blur() implementation to work
         style={{ borderColor: 'gray' }}
-        titleStyle={{ color: 'dimgray' }}
+        labelStyle={{ color: 'dimgray' }}
         inputStyle={{ color: 'slategray' }}
         messageStyle={{ color: 'red' }}
         icon={ <Icon name={iconName} size={18} color={'steelblue'} /> }
@@ -200,7 +200,7 @@ class Form extends Component {
     return (
       <StatelessForm style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}>
         <FormInput
-          title='Name'
+          label='Name'
           placeholder='Tell us your name'
           iconName='account-circle'
           value={name}
@@ -209,7 +209,7 @@ class Form extends Component {
           onChangeText={(text) => { this.setState({name: text}) }}
         />
         <FormInput
-          title='Email'
+          label='Email'
           placeholder='type@your.email'
           autoCorrect={false}
           autoCapitalize='none'
@@ -221,7 +221,7 @@ class Form extends Component {
           onChangeText={(text) => { this.setState({email: text}) }}
         />
         <FormInput
-          title='Password'
+          label='Password'
           placeholder='Create a password'
           autoCorrect={false}
           autoCapitalize='none'
@@ -295,7 +295,7 @@ class FormInput extends Component {
       <InlineTextInput
         ref='input'
         style={{ borderColor: 'gray' }}
-        titleStyle={{ color: 'dimgray' }}
+        labelStyle={{ color: 'dimgray' }}
         inputStyle={{ color: 'slategray' }}
         messageStyle={{ color: 'red' }}
         icon={ <Icon name={iconName} size={18} color={'steelblue'} /> }
@@ -330,7 +330,7 @@ class Form extends Component {
       <StatelessForm style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}>
         <FormInput
           name='name'
-          title='Name'
+          label='Name'
           placeholder='Tell us your name'
           iconName='account-circle'
           value={name}
@@ -338,7 +338,7 @@ class Form extends Component {
         />
         <FormInput
           name='email'
-          title='Email'
+          label='Email'
           placeholder='type@your.email'
           autoCorrect={false}
           autoCapitalize='none'
@@ -349,7 +349,7 @@ class Form extends Component {
         />
         <FormInput
           name='password'
-          title='Password'
+          label='Password'
           placeholder='Create a password'
           autoCorrect={false}
           autoCapitalize='none'
@@ -430,7 +430,7 @@ class FormInput extends Component {
       <InlineTextInput
         ref='input'
         style={{ borderColor: 'gray' }}
-        titleStyle={{ color: 'dimgray' }}
+        labelStyle={{ color: 'dimgray' }}
         inputStyle={{ color: 'slategray' }}
         messageStyle={{ color: 'red' }}
         icon={ <Icon name={iconName} size={18} color={'steelblue'} /> }
@@ -455,14 +455,14 @@ class Form extends Component {
       <StatelessForm style={{flex: 1, marginTop: 20, backgroundColor: 'lightgray'}}>
         <FormInput
           name='name'
-          title='Name'
+          label='Name'
           placeholder='Tell us your name'
           iconName='account-circle'
           { ...name }
         />
         <FormInput
           name='email'
-          title='Email'
+          label='Email'
           placeholder='type@your.email'
           autoCorrect={false}
           autoCapitalize='none'
@@ -472,7 +472,7 @@ class Form extends Component {
         />
         <FormInput
           name='password'
-          title='Password'
+          label='Password'
           placeholder='Create a password'
           autoCorrect={false}
           autoCapitalize='none'
@@ -527,13 +527,13 @@ A wrapper that will manage auto-focusing and auto-scrolling for its children com
 
 | Property | Type | Default | Description |
 |---------------|----------|--------------|----------------------------------------------------------------|
-| title | string | 'Use title prop' | Title for the text input |
+| label | string | 'Use label prop' | Label for the text input |
 | value | string | null | Value for the text input |
 | valid | boolean | false | Whether the value is valid or not |
 | message | string | null | Validation message to be shown |
 | style | style | {} | Style changes to the main ScrollView |
 | iconStyle | style | {} | Style changes to the icon View |
-| titleStyle | style | {} | Style changes to the title Text |
+| labelStyle | style | {} | Style changes to the label Text |
 | inputStyle | style | {} | Style changes to the TextInput |
 | messageStyle | style | {} | Style changes to the validation message Text |
 | icon | element | null | Any react component to be used as icon |
