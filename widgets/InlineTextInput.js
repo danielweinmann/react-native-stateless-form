@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, View, Text, TextInput } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { View, Text, TextInput, StyleSheet } from 'react-native'
 
 export default class InlineTextInput extends Component {
   componentDidMount() {
@@ -54,7 +55,8 @@ export default class InlineTextInput extends Component {
   }
 
   renderMessage() {
-    const { message, messageStyle, style } = this.props
+    const { message, messageStyle } = this.props
+    const style = StyleSheet.flatten(this.props.style)
     if (this.shouldDisplayMessage()) {
       return(
         <View style={{
@@ -74,7 +76,8 @@ export default class InlineTextInput extends Component {
   }
 
   render() {
-    const { title, value, style, titleStyle, inputStyle, nextInput, onBlur, multiline } = this.props
+    const { title, value, titleStyle, inputStyle, nextInput, onBlur, multiline } = this.props
+    const style = StyleSheet.flatten(this.props.style)
     return (
       <View
         onLayout={this.handleLayout.bind(this)}
@@ -105,6 +108,7 @@ export default class InlineTextInput extends Component {
           </Text>
           <TextInput
             clearButtonMode='while-editing'
+            underlineColorAndroid='transparent'
             returnKeyType={ multiline ? 'default' : (nextInput ? 'next' : 'done') }
             onSubmitEditing={this.handleSubmitEditing.bind(this)}
             { ...this.props }
