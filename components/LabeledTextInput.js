@@ -88,7 +88,6 @@ export default class LabeledTextInput extends Component {
           paddingHorizontal: 10,
         }, style]}
       >
-        { this.renderIcon() }
         <Text
           style={[{
             fontSize: 12,
@@ -98,26 +97,30 @@ export default class LabeledTextInput extends Component {
         >
           {label}
         </Text>
-        <TextInput
-          clearButtonMode='while-editing'
-          underlineColorAndroid='transparent'
-          returnKeyType={ multiline ? 'default' : (nextInput ? 'next' : 'done') }
-          onSubmitEditing={this.handleSubmitEditing.bind(this)}
-          { ...this.props }
-          onFocus={this.handleFocus.bind(this)}
-          onBlur={onBlur}
-          ref='input'
-          value={value}
-          style={[{
-            height: 24,
-            paddingHorizontal: 10,
-            fontSize: 12,
-            lineHeight: 24,
-            borderWidth: StyleSheet.hairlineWidth,
-            borderColor: 'lightgray',
-            backgroundColor: 'white',
-          }, inputStyle]}
-        />
+        <View style={[{ flex: 1, flexDirection: 'row', alignItems: 'center'}]}>
+          { this.renderIcon() }
+          <TextInput
+            clearButtonMode='while-editing'
+            underlineColorAndroid='transparent'
+            returnKeyType={ multiline ? 'default' : (nextInput ? 'next' : 'done') }
+            onSubmitEditing={this.handleSubmitEditing.bind(this)}
+            { ...this.props }
+            onFocus={this.handleFocus.bind(this)}
+            onBlur={onBlur}
+            ref='input'
+            value={value}
+            style={[{
+              flex: 1,
+              height: 24,
+              paddingHorizontal: 10,
+              fontSize: 12,
+              lineHeight: 24,
+              borderWidth: StyleSheet.hairlineWidth,
+              borderColor: 'lightgray',
+              backgroundColor: 'white',
+            }, inputStyle]}
+            />
+        </View>
         { this.renderMessage() }
       </View>
     )
