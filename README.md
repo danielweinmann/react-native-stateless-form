@@ -17,13 +17,11 @@ It implements the most common pattern of mobile form user interaction by convens
 - It displays validation message inside the field
 - When a field receives focus, it displays a keyboard (\*)
 - If it is not the last field in the form, the keyboard return key is set to `Next` (\*\*)
-- If it is the last field in the form, the keyboard return key is set to `Done` and hides keaboard on return (\*\*)
+- If it is the last field in the form, the keyboard return key is set to `Done` and hides keaboard on return
 - When a field receives focus, the form scrolls to the top of the field to avoid it being hidden behind the keyboard
 - When all fields lose focus, the form scrolls back to the top of the form
 
 (\*) Unless an external keyboard is connected to the device
-
-(\*\*) On Android the return key button is always displayed as `Done` for now, since React Native does not support changing it yet. But the behaviour works correctly ;)
 
 ## What it does NOT do
 
