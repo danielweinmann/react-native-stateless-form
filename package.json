@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/danielweinmann/react-native-stateless-form/issues"
   },
-  "homepage": "https://github.com/danielweinmann/react-native-stateless-form#readme"
+  "homepage": "https://github.com/danielweinmann/react-native-stateless-form#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  }
 }

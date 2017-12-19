@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Platform, ScrollView, View } from 'react-native'
+import PropTypes from 'prop-types'
 
 export default class StatelessForm extends Component {
   componentDidMount() {
@@ -69,8 +70,8 @@ export default class StatelessForm extends Component {
 
 StatelessForm.propTypes = {
   style: PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.arrayOf(React.PropTypes.object),
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object),
   ]),
 }
 
