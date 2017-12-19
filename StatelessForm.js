@@ -8,6 +8,8 @@ export default class StatelessForm extends Component {
   }
 
   childrenWithProps() {
+    if (!this.props.children) return
+
     let nextInput = null
     let inputCount = 0
     return React.Children.map(this.props.children, (child) => child).reverse().map((child) => {
